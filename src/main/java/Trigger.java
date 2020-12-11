@@ -2,7 +2,7 @@
 
 public class Trigger {
     public int someLogic() {
-        return 1;
+          return 1;
     }
 }
 
