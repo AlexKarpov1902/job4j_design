@@ -17,6 +17,6 @@ after_success:
 notifications:
   email:
     recipients:
-      -leb34359@mail.ru
+      - leb34359@mail.ru
     on_success: never # default: change
     on_failure: always # default: always
