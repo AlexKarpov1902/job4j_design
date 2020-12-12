@@ -11,7 +11,6 @@ public class FlatMap<T> implements Iterator<T> {
     public FlatMap(Iterator<Iterator<T>> data) {
         this.data = data;
         this.cursor = (data.hasNext()) ? data.next() : null;
-
     }
 
     @Override
@@ -19,7 +18,17 @@ public class FlatMap<T> implements Iterator<T> {
         if (cursor == null) {
             return false;
         }
-        return isHasNext();
+        while (true) {
+            if (cursor.hasNext()) {
+                return true;
+            } else {
+                if (data.hasNext()) {
+                    this.cursor = data.next();
+                } else {
+                    return false;
+                }
+            }
+        }
     }
 
     @Override
