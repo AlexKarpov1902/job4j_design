@@ -35,13 +35,16 @@ public class MatrixIt implements Iterator<Integer> {
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
-        while (true) {
-            if (data[row].length <= ++column) {
-                column = -1;
-                row++;
-            } else {
-                return data[row][column];
-            }
+        return getNext();
+    }
+
+    private Integer getNext() {
+        if (data[row].length <= ++column) {
+            column = -1;
+            row++;
+            return getNext();
+        } else {
+            return data[row][column];
         }
     }
 }
