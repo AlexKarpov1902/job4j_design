@@ -1,5 +1,6 @@
 package ru.job4j.iterator;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -10,25 +11,15 @@ public class FlatMap<T> implements Iterator<T> {
 
     public FlatMap(Iterator<Iterator<T>> data) {
         this.data = data;
-        this.cursor = (data.hasNext()) ? data.next() : null;
+        this.cursor = Collections.emptyIterator();
     }
 
     @Override
     public boolean hasNext() {
-        if (cursor == null) {
-            return false;
+        while (!cursor.hasNext() && data.hasNext()) {
+            this.cursor = data.next();
         }
-        while (true) {
-            if (cursor.hasNext()) {
-                return true;
-            } else {
-                if (data.hasNext()) {
-                    this.cursor = data.next();
-                } else {
-                    return false;
-                }
-            }
-        }
+        return cursor.hasNext();
     }
 
     @Override
@@ -37,18 +28,6 @@ public class FlatMap<T> implements Iterator<T> {
             throw new NoSuchElementException();
         }
         return cursor.next();
-    }
-
-    private Boolean isHasNext() {
-        if (cursor.hasNext()) {
-            return true;
-        } else {
-            if (data.hasNext()) {
-                this.cursor = data.next();
-                return isHasNext();
-            }
-        }
-        return false;
     }
 
 
