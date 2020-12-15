@@ -1,9 +1,8 @@
 package ru.job4j.collection;
 
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.Objects;
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import java.util.*;
 
 public class SimpleArray<T> implements Iterable<T> {
     private  T[] data;
@@ -11,6 +10,7 @@ public class SimpleArray<T> implements Iterable<T> {
     private int capacity;
     private int modCount;
 
+    @SuppressWarnings({"Unchecked"})
     public SimpleArray(int capacity) {
         if (capacity >= 0) {
             this.data = (T[]) new Object[capacity];
@@ -60,10 +60,10 @@ public class SimpleArray<T> implements Iterable<T> {
         Objects.checkIndex(index, size);
         return data[index];
     }
-
+    @NonNull
     @Override
     public Iterator<T> iterator() {
-        return new SimpleArray.Iter(data);
+        return new SimpleArray<T>.Iter(data);
     }
 
     private class Iter implements Iterator<T> {
@@ -110,9 +110,12 @@ public class SimpleArray<T> implements Iterable<T> {
         sa.add("Девятый");
         sa.add("Десятый");
         sa.add("Одиннадцатый");
+        sa.set(9, "Замена");
         System.out.println(sa.get(0));
         System.out.println(sa.get(9));
         System.out.println(sa.get(10));
+        sa.remove(5);
+        System.out.println(sa.get(5));
 
     }
 }
