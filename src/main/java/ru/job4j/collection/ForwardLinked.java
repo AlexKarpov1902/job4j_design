@@ -1,5 +1,7 @@
 package ru.job4j.collection;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -7,7 +9,7 @@ public class ForwardLinked<T> implements Iterable<T> {
     private Node<T> head;
 
     public void add(T value) {
-        Node<T> node = new Node<T>(value, null);
+        Node<T> node = new Node<>(value, null);
         if (head == null) {
             head = node;
             return;
@@ -18,10 +20,10 @@ public class ForwardLinked<T> implements Iterable<T> {
         }
         tail.next = node;
     }
-
+    @NonNull
     @Override
     public Iterator<T> iterator() {
-        return new Iterator<T>() {
+        return new Iterator<>() {
             Node<T> node = head;
 
             @Override
@@ -40,6 +42,21 @@ public class ForwardLinked<T> implements Iterable<T> {
             }
         };
     }
+
+    public T deleteLast() {
+        if (head == null) {
+            throw new NoSuchElementException();
+        }
+        Node<T> tail = head;
+        Node<T> last = tail;
+        while (tail.next != null) {
+            last = tail;
+            tail = tail.next;
+        }
+        last.next = null;
+        return tail.value;
+    }
+
 
     public T deleteFirst() {
         if (head == null) {
