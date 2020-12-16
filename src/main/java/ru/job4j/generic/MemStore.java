@@ -17,10 +17,9 @@ public final class MemStore<T extends Base> implements Store<T> {
         int j = find(id);
         if (j == -1) {
             return false;
-        } else {
-            mem.set(j, model);
-            return true;
         }
+        mem.set(j, model);
+        return true;
     }
 
     @Override
@@ -28,10 +27,9 @@ public final class MemStore<T extends Base> implements Store<T> {
         int j = find(id);
         if (j == -1) {
             return false;
-        } else {
-            mem.remove(j);
-            return true;
         }
+        mem.remove(j);
+        return true;
     }
 
     @Override
@@ -39,9 +37,8 @@ public final class MemStore<T extends Base> implements Store<T> {
         int j = find(id);
         if (j == -1) {
             return null;
-        } else {
-            return mem.get(j);
         }
+        return mem.get(j);
     }
 
     /**
