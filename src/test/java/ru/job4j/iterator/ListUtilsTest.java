@@ -40,21 +40,21 @@ public class ListUtilsTest {
     public void whenRemoveIf() {
         List<Integer> input = new ArrayList<>(Arrays.asList(7, 2, 8, 3));
         ListUtils.removeIf(input, (i) -> i > 5);
-        assertThat(Arrays.asList( 2, 3), Is.is(input));
+        assertThat(Arrays.asList(2, 3), Is.is(input));
     }
 
     @Test
     public void whenReplaceIf() {
         List<Integer> input = new ArrayList<>(Arrays.asList(7, 2, 8, 3));
         ListUtils.replaceIf(input, (i) -> i > 5, 0);
-        assertThat(Arrays.asList( 0, 2, 0, 3), Is.is(input));
+        assertThat(Arrays.asList(0, 2, 0, 3), Is.is(input));
     }
 
     @Test
     public void whenRemoveAll() {
         List<Integer> input = new ArrayList<>(Arrays.asList(4, 2, 5, 3, 6));
-        ListUtils.removeAll(input, Arrays.asList( 1, 2, 3));
-        assertThat(Arrays.asList(4,5,6), Is.is(input));
+        ListUtils.removeAll(input, Arrays.asList(1, 2, 3));
+        assertThat(Arrays.asList(4, 5, 6), Is.is(input));
     }
 
 }

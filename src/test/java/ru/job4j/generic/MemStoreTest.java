@@ -12,16 +12,16 @@ public class MemStoreTest {
     @Before
     public void setUp()  {
         mem = new MemStore<>();
-        mem.add(new Role("1","Иван"));
-        mem.add(new Role("2","Федор"));
-        mem.add(new Role("3","Макс"));
+        mem.add(new Role("1", "Иван"));
+        mem.add(new Role("2", "Федор"));
+        mem.add(new Role("3", "Макс"));
 
 
     }
     @Test
     public void findById() {
-        assertThat(mem.findById("1").getName(),is("Иван"));
-        assertThat(mem.findById("3").getName(),is("Макс"));
+        assertThat(mem.findById("1").getName(), is("Иван"));
+        assertThat(mem.findById("3").getName(), is("Макс"));
     }
 
     @Test
@@ -36,8 +36,8 @@ public class MemStoreTest {
 
     @Test
     public void replace() {
-        mem.replace("2", new Role("2","Павел"));
-        assertThat(mem.findById("2").getName(),is("Павел"));
+        mem.replace("2", new Role("2", "Павел"));
+        assertThat(mem.findById("2").getName(), is("Павел"));
     }
 
     @Test
