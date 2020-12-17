@@ -28,7 +28,7 @@ public class SimpleArrayTest {
         array.add("Первый");
         array.add("Второй");
         array.add("Третий");
-        array.set(1,"Пятый");
+        array.set(1, "Пятый");
         assertThat(array.get(1), is("Пятый"));
     }
 
