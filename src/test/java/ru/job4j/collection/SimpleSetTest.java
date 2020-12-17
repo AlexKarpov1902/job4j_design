@@ -16,10 +16,9 @@ public class SimpleSetTest {
         SimpleSet<String> set = new SimpleSet<>();
         set.add("first");
         set.add("second");
-        String rsl = set.iterator().next();
-        assertThat(rsl, is("first"));
-        rsl = set.iterator().next();
-        assertThat(rsl, is("second"));
+        Iterator<String> it = set.iterator();
+        assertThat(it.next(), is("first"));
+        assertThat(it.next(), is("second"));
     }
 
 

@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-class SimpleLinkedListTest {
+public class SimpleLinkedListTest {
 
     @org.junit.Test
     public void whenAddThenGet() {
