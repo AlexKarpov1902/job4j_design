@@ -1,5 +1,6 @@
 package ru.job4j.collection;
 
+
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.*;
@@ -32,6 +33,7 @@ public class SimpleLinkedList<T> implements Iterable<T> {
         }
         return x.item;
     }
+
     @NonNull
     @Override
     public Iterator<T> iterator() {
@@ -45,6 +47,9 @@ public class SimpleLinkedList<T> implements Iterable<T> {
         private final int expectedModCount;
 
         public Iter() {
+            if (first == null) {
+                throw new NoSuchElementException();
+            }
             this.lastGet = null;
             this.next = first.next;
             this.index = 0;

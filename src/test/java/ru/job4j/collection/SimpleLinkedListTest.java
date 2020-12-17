@@ -1,5 +1,7 @@
 package ru.job4j.collection;
 
+import org.junit.Test;
+
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -9,7 +11,7 @@ import static org.junit.Assert.assertThat;
 
 public class SimpleLinkedListTest {
 
-    @org.junit.Test
+    @Test
     public void whenAddThenGet() {
         SimpleLinkedList<String> linkList = new SimpleLinkedList<>();
         linkList.add("first");
@@ -18,37 +20,36 @@ public class SimpleLinkedListTest {
         assertThat(rsl, is("second"));
     }
 
-    @org.junit.Test
+    @Test
     public void whenAddThenIt() {
         SimpleLinkedList<String> linkList = new SimpleLinkedList<>();
         linkList.add("first");
         linkList.add("second");
-        String rsl = linkList.iterator().next();
-        assertThat(rsl, is("first"));
-        rsl = linkList.iterator().next();
-        assertThat(rsl, is("second"));
+        Iterator<String> it = linkList.iterator();
+        assertThat(it.next(), is("first"));
+        assertThat(it.next(), is("second"));
     }
 
-    @org.junit.Test(expected = IndexOutOfBoundsException.class)
+    @Test(expected = IndexOutOfBoundsException.class)
     public void whenGetEmpty() {
         SimpleLinkedList<String> linkList = new SimpleLinkedList<>();
         linkList.get(0);
     }
 
-    @org.junit.Test(expected = IndexOutOfBoundsException.class)
+    @Test(expected = IndexOutOfBoundsException.class)
     public void whenGetOutBound() {
         SimpleLinkedList<String> linkList = new SimpleLinkedList<>();
         linkList.add("first");
         linkList.get(1);
     }
 
-    @org.junit.Test(expected = NoSuchElementException.class)
+    @Test(expected = NoSuchElementException.class)
     public void whenGetEmptyFromIt() {
         SimpleLinkedList<String> linkList = new SimpleLinkedList<>();
         linkList.iterator().next();
     }
 
-    @org.junit.Test(expected = ConcurrentModificationException.class)
+    @Test(expected = ConcurrentModificationException.class)
     public void whenCorruptedIt() {
         SimpleLinkedList<String> linkList = new SimpleLinkedList<>();
         linkList.add("first");
