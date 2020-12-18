@@ -13,6 +13,8 @@ public class Main {
         map.put(user1, "First");
         map.put(user2, "Second");
         System.out.println(map.toString());
+        System.out.println(map.get(user2));
+        System.out.println(map.get(user1));
 
     }
 }
