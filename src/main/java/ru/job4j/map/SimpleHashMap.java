@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
-public class MyHashMap<K, V> {
+public class SimpleHashMap<K, V> {
 
     private Object[] array;
     private int size;
@@ -14,7 +14,7 @@ public class MyHashMap<K, V> {
     private int resizeCondition;
     private int modCount = 0;
 
-    public MyHashMap() {
+    public SimpleHashMap() {
         this.size = 16;
         this.loadFactor = 0.75f;
         this.array = new Object[size];
