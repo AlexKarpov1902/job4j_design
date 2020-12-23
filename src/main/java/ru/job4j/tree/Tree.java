@@ -1,6 +1,7 @@
 package ru.job4j.tree;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 class Tree<E> implements SimpleTree<E> {
     private final Node<E> root;
@@ -16,11 +17,9 @@ class Tree<E> implements SimpleTree<E> {
             return false;
         }
         Optional<Node<E>> par = findBy(parent);
-
         if (par.isEmpty()) {
-            throw new NoSuchElementException();
+            return false;
         }
-
         par.get().children.add(new Node<>(child));
         return true;
     }
@@ -28,30 +27,33 @@ class Tree<E> implements SimpleTree<E> {
     @Override
     public Optional<Node<E>> findBy(E value) {
         Optional<Node<E>> rsl = Optional.empty();
-        Queue<Node<E>> data = new LinkedList<>();
-        data.offer(this.root);
-        while (!data.isEmpty()) {
-            Node<E> el = data.poll();
-            if (el.value.equals(value)) {
-                rsl = Optional.of(el);
-                break;
-            }
-            data.addAll(el.children);
+        Predicate<Node<E>> isNodeEqual = (x) -> x.value.equals(value);
+        Node<E> el = findNode(isNodeEqual);
+        if (el == null) {
+            return rsl;
+        } else {
+            return Optional.of(el);
         }
-        return rsl;
     }
 
     public boolean isBinary() {
-        Optional<Node<E>> rsl = Optional.empty();
+        Predicate<Node<E>> isNotBiTree = (x) -> x.children.size() > 2;
+        if (findNode(isNotBiTree) != null) {
+            return false;
+        }
+        return true;
+    }
+
+    private Node<E> findNode(Predicate<Node<E>> predicate) {
         Queue<Node<E>> data = new LinkedList<>();
         data.offer(this.root);
         while (!data.isEmpty()) {
             Node<E> el = data.poll();
-            if (el.children.size() > 2) {
-                return false;
+            if (predicate.test(el)) {
+                return el;
             }
             data.addAll(el.children);
         }
-        return true;
+        return null;
     }
 }
