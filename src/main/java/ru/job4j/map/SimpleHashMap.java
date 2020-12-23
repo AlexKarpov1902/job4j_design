@@ -30,6 +30,7 @@ public class SimpleHashMap<K, V> {
         }
         array[i] = node;
         count++;
+        modCount++;
         if (count > resizeCondition) {
             resize();
         }
@@ -38,20 +39,28 @@ public class SimpleHashMap<K, V> {
 
     public V get(K key) {
         int i = hash(Objects.hashCode(key));
-        if (array[i] == null) {
+        Node<K, V> node = (Node<K, V>) array[i];
+        if (node == null) {
             return null;
         }
-        Node<K, V> node = (Node<K, V>) array[i];
+        if (!key.equals(node.key)) {
+            return null;
+        }
         return node.getValue();
     }
 
     public boolean delete(K key) {
         int i = hash(Objects.hashCode(key));
-        if (array[i] == null) {
+        Node<K, V> node = (Node<K, V>) array[i];
+        if (node == null) {
+            return false;
+        }
+        if (!key.equals(node.key)) {
             return false;
         }
         array[i] = null;
         count--;
+        modCount++;
         return true;
     }
 
