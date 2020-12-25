@@ -10,7 +10,7 @@ import static org.junit.Assert.assertThat;
 
 public class AnalizeTest {
     @Test
-    public void whenAdd2_Deleted1_Changed1() {
+    public void whenAdd2Deleted1Changed1() {
         List<Analize.User> prev = new ArrayList<>();
         prev.add(new Analize.User(1, "Maxim"));
         prev.add(new Analize.User(2, "Peter"));
@@ -24,9 +24,9 @@ public class AnalizeTest {
         cur.add(new Analize.User(7, "Kirill"));    // добавлено 2
         cur.add(new Analize.User(8, "Vasiliy"));
 
-        cur.remove( new Analize.User(2, "Peter"));   // удален 1
+        cur.remove(new Analize.User(2, "Peter"));   // удален 1
 
-        cur.remove( new Analize.User(3, "Don"));     // изменен 1
+        cur.remove(new Analize.User(3, "Don"));     // изменен 1
         cur.add(new Analize.User(3, "DonPedro"));
 
         System.out.println(cur);
