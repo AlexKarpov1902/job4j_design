@@ -21,11 +21,8 @@ public class Analize {
                 }
             }
         }
-        for (Analize.User user : previous) {
-            if (!mapCur.containsKey(user.id)) {            // если нет id, значит  удален
-                result.deleted++;
-            }
-        }
+        result.deleted = previous.size() + result.added - current.size();
+
         return result;
 
 
@@ -99,6 +96,5 @@ public class Analize {
                     + '}';
         }
     }
-
 
 }
