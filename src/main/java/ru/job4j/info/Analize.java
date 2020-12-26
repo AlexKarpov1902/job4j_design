@@ -2,35 +2,28 @@ package ru.job4j.info;
 
 import java.util.*;
 
-public class Analize<User> {
+public class Analize {
 
     public Info diff(List<Analize.User> previous, List<Analize.User> current) {
 
         Info result = new Info();
-        // создаем списки-сеты из List для быстрого поиска
-        Set<Analize.User> setPrev = new HashSet<>(previous);
-        Set<Analize.User> setCur = new HashSet<>(current);
-        // Список-сет id previous
-        Set<Integer> setIdPrev = new HashSet<>();
-        previous.stream().forEach(user -> setIdPrev.add(user.getId()));
-        // список-сет id current
-        Set<Integer> setIdCur = new HashSet<>();
-        current.stream().forEach(user -> setIdCur.add(user.getId()));
+        Map<Integer, Analize.User> mapPrev = new HashMap<>();
+        previous.forEach(n -> mapPrev.put(n.id, n));
+        Map<Integer, Analize.User> mapCur = new HashMap<>();
+        current.forEach(n -> mapCur.put(n.id, n));
 
         for (Analize.User user : current) {
-            if (!setPrev.contains(user)) {          // если нет в сете, значит добавлен или изменен
-                if (!setIdPrev.contains(user.getId())) {   // если нет в сете id, значит добавлен, иначе изменен
-                    result.added++;
-                } else {
+            if (!mapPrev.containsKey(user.id)) {          // если нет id, значит  добавлен
+                result.added++;
+            } else {
+                if (!mapPrev.containsValue(user)) {      // если нет в мапе , значит изменен
                     result.changed++;
                 }
             }
         }
         for (Analize.User user : previous) {
-            if (!setCur.contains(user)) {            // если нет в сете, значит удален или изменен
-                if (!setIdCur.contains(user.getId())) {  // если нет в сете id, значит удален, иначе изменен( учтено выше)
-                    result.deleted++;
-                }
+            if (!mapCur.containsKey(user.id)) {            // если нет id, значит  удален
+                result.deleted++;
             }
         }
         return result;

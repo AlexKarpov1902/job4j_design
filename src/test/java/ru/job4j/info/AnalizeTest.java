@@ -30,7 +30,7 @@ public class AnalizeTest {
         cur.add(new Analize.User(3, "DonPedro"));
 
         System.out.println(cur);
-        Analize<Analize.User> analiz = new Analize<>();
+        Analize analiz = new Analize();
         Analize.Info result = analiz.diff(prev, cur);
         System.out.println(result.toString());
         assertThat(result.added, is(2));
