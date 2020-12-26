@@ -20,7 +20,7 @@ public class LogFilter {
                 PrintWriter pw = new PrintWriter(
                         new BufferedOutputStream(new FileOutputStream(file)))
         ) {
-            log.forEach(n -> pw.write(n + System.lineSeparator()));
+            log.forEach(n -> pw.println(n));
         } catch (Exception e) {
             e.printStackTrace();
         }
