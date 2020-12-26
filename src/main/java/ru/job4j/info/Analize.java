@@ -9,8 +9,6 @@ public class Analize {
         Info result = new Info();
         Map<Integer, Analize.User> mapPrev = new HashMap<>();
         previous.forEach(n -> mapPrev.put(n.id, n));
-        Map<Integer, Analize.User> mapCur = new HashMap<>();
-        current.forEach(n -> mapCur.put(n.id, n));
 
         for (Analize.User user : current) {
             if (!mapPrev.containsKey(user.id)) {          // если нет id, значит  добавлен
@@ -22,10 +20,7 @@ public class Analize {
             }
         }
         result.deleted = previous.size() + result.added - current.size();
-
         return result;
-
-
     }
 
     public static class User {
