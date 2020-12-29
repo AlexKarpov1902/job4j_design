@@ -13,20 +13,13 @@ public class Config {
     }
 
     public void load() {
-        List<String> list = new ArrayList<>();
+
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
            read.lines().filter(n -> (!n.isEmpty() && !n.startsWith("#")))
-                    .map(n -> n.split("="))
+                    .map(n -> n.split("=")).filter(n -> n.length == 2)
                     .forEach(n -> values.put(n[0], n[1]));
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        String[] array;
-        for (String s : list) {
-            array = s.split("=");
-            if (array.length == 2) {
-                values.put(array[0], array[1]);
-            }
         }
     }
 
