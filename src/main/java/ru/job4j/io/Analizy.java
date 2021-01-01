@@ -40,8 +40,8 @@ public class Analizy {
     }
 
     public static void main(String[] args) {
-        Analizy an = new Analizy();
-       an.unavailable("server.log", "serverout.log");
+   //     Analizy an = new Analizy();
+   //    an.unavailable("server.log", "serverout.log");
 
     }
 }
