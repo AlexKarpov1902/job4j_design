@@ -2,7 +2,7 @@ package ru.job4j.serialization;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
+import org.json.JSONObject;
 import java.io.Serializable;
 
 public class Shape implements Serializable {
@@ -18,6 +18,26 @@ private final boolean fool;
         this.width = width;
         this.center = center;
         this.fool = fool;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public Point getCenter() {
+        return center;
+    }
+
+    public boolean isFool() {
+        return fool;
     }
 
     @Override
@@ -48,6 +68,32 @@ private final boolean fool;
 
         final Shape form2 = gson.fromJson(formJSON, Shape.class);
         System.out.println(form2);
+
+        // библиотека json-java
+        /* JSONObject из json-строки строки */
+        JSONObject jsonPoint = new JSONObject("{\"x\":10,\"y\": 20}");
+
+        /* JSONArray из ArrayList */
+    /*    List<String> list = new ArrayList<>();
+        list.add("Student");
+        list.add("Free");
+        JSONArray jsonStatuses = new JSONArray(list);*/
+
+        /* JSONObject напрямую методом put */
+        final Shape form10 = new Shape("Form1", 10, 15, new Point(5, 3), true);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("name", form10.getName());
+        jsonObject.put("height", form10.getHeight());
+        jsonObject.put("width", form10.getWidth());
+        jsonObject.put("center", jsonPoint);
+        jsonObject.put("fool", form10.isFool());
+
+        /* Выведем результат в консоль */
+        System.out.println(jsonObject.toString());
+
+        /* Преобразуем объект  в json-строку */
+        System.out.println(new JSONObject(form10).toString());
+
     }
 }
 
@@ -59,6 +105,14 @@ class Point {
     public Point(int x, int y) {
         this.x = x;
         this.y = y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 
     @Override
