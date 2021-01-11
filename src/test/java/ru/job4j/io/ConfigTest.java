@@ -18,7 +18,7 @@ public class ConfigTest {
                 is("Petr Arsentev")
         );
     }
-
+    @Ignore
     @Test
     public void whenWorkProperties() {
         String path = "app.properties";
