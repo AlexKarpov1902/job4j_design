@@ -21,7 +21,7 @@ public class AnalizyTest {
     public void when() throws IOException {
 
         File in = folder.newFile("server.log");
-        try (PrintWriter pw = new PrintWriter(in) ) {
+        try (PrintWriter pw = new PrintWriter(in)) {
             Stream.of(
                     "200 10:56:01",
                     "200 10:57:01",
